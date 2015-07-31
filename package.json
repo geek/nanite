@@ -1,0 +1,22 @@
+{
+  "name": "nanite",
+  "version": "0.0.1",
+  "description": "A pattern matching stream transform",
+  "author": "Dean McDonnell <mcdonnelldean@outlook.com> (http://mcdonnelldean.me/)",
+  "main": "nanite.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mcdonnelldean/nanite.git"
+  },
+  "scripts": {
+    "lint": "standard"
+  },
+  "dependencies": {
+    "patrun": "^0.4.4",
+    "readable-stream": "^2.0.2"
+  },
+  "devDependencies": {
+    "standard": "^4.5.4"
+  }
+}
