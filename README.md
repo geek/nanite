@@ -1,15 +1,17 @@
 # Nanite
-A pattern matching stream transform; Nanite is a simple node transform that runs in _object mode_. Anything
-written to a Nanite instance is first pattern matched to see if a handler can be found, if not the message is handled, it is piped out of nanite, just like a regular transform.
+A pattern matching stream transform; Nanite is a simple node steam transform that runs in _object mode_.
+Anything written to a Nanite instance is first pattern matched to see if a handler can be found. If
+the message is not handled, it is piped out of Nanite, just like a regular transform.
 
 ___This module is experimental and brand new, it has no tests yet___
 
 ## Example
-The example below demonstrates how to send data across two connected Nanite instances.
+The example below demonstrates how to send data across two connected Nanite instances, as well as
+showcasing other features of the api:
 
 ``` js
-var nanite = require('../nanite')
-var into = require('../into')
+var nanite = require('nanite')
+var into = require('nanite/into')
 
 var streamOne = nanite()
 var streamTwo = nanite()
@@ -34,7 +36,7 @@ handlerTwo(into(function (msg, done) {
 }))
 ```
 
-As you can see, Nanite is nothing more than a standard transform meaning it can be piped to and from
+As you can see, Nanite is nothing more than a standard transform meaning it can be piped to and from.
 It is important to note that messages not handled by handler will be piped out, this includes writes
 before a handler is added.
 
@@ -51,12 +53,12 @@ var allHandlers = nanite.handlers.list()
 ```
 
 ### .write() - _void_
-A method for writing new values to a given Nanite instances. No matter where a value is written it
+A method for writing new values to a given Nanite instance. No matter when a value is written it
 always starts at the top of the stream and works its way down.
 
 ``` js
-var nanite = require('../nanite')()
-var into = require('../into')
+var nanite = require('nanite')()
+var into = require('nanite/into')
 
 var handlerOne = nanite.handlerFor({cmd: 'say-hello'})
 var handlerTwo = nanite.handlerFor({cmd: 'say-goodbye'})
@@ -74,7 +76,6 @@ handlerTwo(into(function (msg, done) {
 
 nanite.write({cmd: 'say-hello'})
 ```
-
 
 ### .addHandler(pattern, stream) - _returns: handler_
 A method for adding handlers and their patterns to Nanite. Any message satisfied by the provided
@@ -113,8 +114,8 @@ to be wrapped up for use later. To use, simply consume as a function, passing in
 transform.
 
 ``` js
-var nanite = require('../nanite')()
-var into = require('../into')
+var nanite = require('nanite')()
+var into = require('nanite/into')
 
 var handlerOne = nanite.handlerFor({cmd: 'say-hello'})
 var handlerTwo = nanite.handlerFor({cmd: 'say-goodbye'})
