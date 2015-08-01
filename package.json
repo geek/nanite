@@ -1,6 +1,6 @@
 {
   "name": "nanite",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A pattern matching stream transform",
   "author": "Dean McDonnell <mcdonnelldean@outlook.com> (http://mcdonnelldean.me/)",
   "main": "lib/nanite.js",
