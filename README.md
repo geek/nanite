@@ -7,8 +7,6 @@ A pattern matching stream transform; Nanite is a simple node steam transform tha
 Anything written to a Nanite instance is first pattern matched to see if a handler can be found. If
 the message is not handled, it is piped out of Nanite, just like a regular transform.
 
-___This module is experimental and brand new, it has no tests yet and the npm version is not yet complete___
-
 ## Installation
 To install Nanite, simply use npm:
 
