@@ -1,24 +1,41 @@
-var nanite = require('../nanite')
-var into = require('../into')
+'use strict'
 
-var streamOne = nanite()
-var streamTwo = nanite()
+// get the nanite builder function and take a
+// copy of both the fill and drain functions.
+var nanite = require('../lib/nanite'),
+    fill = nanite.fill,
+    drain = nanite.drain
 
-streamTwo.write({cmd: 'say-hello'})
-streamOne.write({cmd: 'say-goodbye'})
+// we can have multiple individual
+// instances of nanite at any given time.
+var helloStream = nanite(),
+    goodbyeStream = nanite()
 
-var handlerOne = streamOne.handlerFor({cmd: 'say-hello'})
-var handlerTwo = streamTwo.handlerFor({cmd: 'say-goodbye'})
+// because each instance is a transform
+// they are duplex and can be piped together.
+goodbyeStream.pipe(helloStream)
+             .pipe(goodbyeStream)
 
-streamTwo.pipe(streamOne)
-         .pipe(streamTwo)
+// create handler functions for use later.
+var handleHello = helloStream.handlerFor({cmd: 'say-hello'}),
+    handleGoodbye = goodbyeStream.handlerFor({cmd: 'say-goodbye'})
 
-handlerOne(into(function (msg, done) {
+// using drain keeps handlers neat and tidy.
+handleHello(drain(function (msg, done) {
   console.log('Hi!')
   done()
 }))
 
-handlerTwo(into(function (msg, done) {
+// handlers can accept any readable or transform
+// based stream.
+handleGoodbye(drain(function (msg, done) {
   console.log('Goodbye')
   done()
 }))
+
+// write a message to each stream, notice
+// the handlers are on the opposite stream
+// but because they are piped together the
+// messages get through.
+goodbyeStream.write({cmd: 'say-hello'})
+helloStream.write({cmd: 'say-goodbye'})

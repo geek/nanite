@@ -1,18 +1,30 @@
-var nanite = require('../nanite')()
-var into = require('../into')
+'use strict'
 
-var handlerOne = nanite.handlerFor({cmd: 'say-hello'})
-var handlerTwo = nanite.handlerFor({cmd: 'say-goodbye'})
+// create a new instance of nanite and
+// take a copy of the drain function.
+var nanite = require('../lib/nanite')(),
+    drain = nanite.drain
 
-handlerOne(into(function (msg, done) {
-  console.log('Hi!')
+// .handleFor allows you to wrap a pattern in a named function
+// that you can pass a writeable or transform to later.
+var handleHello = nanite.handlerFor({say: 'Hello'}),
+    handleWorld = nanite.handlerFor({say: 'World'})
+
+// in our case we are using the build in writable function,
+// drain. Which will remove the message from the stream for
+// processing.
+handleHello(drain(function (msg, done) {
+  console.log(msg.say)
   done()
 }))
 
-handlerTwo(into(function (msg, done) {
-  console.log('Goodbye')
+// named handlers offer much better readability when
+// patterns become too large or require calculation.
+handleWorld(drain(function (msg, done) {
+  console.log(msg.say + '!')
   done()
 }))
 
-nanite.write({cmd: 'say-hello'})
-nanite.write({cmd: 'say-goodbye'})
+// lets fire both handlers.
+nanite.write({say: 'Hello'})
+nanite.write({say: 'World'})
