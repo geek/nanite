@@ -1,14 +1,14 @@
 'use strict'
 
 // create a new instance of nanite and take a
-// copy of both the fill and drain functions.
+// copy of both the fill and drain builders.
 var nanite = require('../lib/nanite')(),
-    fill = nanite.fill,
-    drain = nanite.drain
+    drain = require('nanite-drain'),
+    fill = require('nanite-fill')
 
 // set up a basic handler, this should be called
 // as many times as there are objects passed to fill.
-var handlePrint = nanite.handlerFor({cmd: 'print'})
+var handlePrint = nanite.pin({cmd: 'print'})
 
 // drain is a simple write stream that accepts a
 // backpressure supported function.

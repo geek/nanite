@@ -1,3 +1,5 @@
+# Any Log files
 *.log
 
+# Node Modules
 node_modules

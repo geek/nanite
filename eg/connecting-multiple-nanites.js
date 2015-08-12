@@ -3,8 +3,8 @@
 // get the nanite builder function and take a
 // copy of both the fill and drain functions.
 var nanite = require('../lib/nanite'),
-    fill = nanite.fill,
-    drain = nanite.drain
+    drain = require('nanite-drain'),
+    fill = require('nanite-fill')
 
 // we can have multiple individual
 // instances of nanite at any given time.
@@ -17,12 +17,12 @@ goodbyeStream.pipe(helloStream)
              .pipe(goodbyeStream)
 
 // create handler functions for use later.
-var handleHello = helloStream.handlerFor({cmd: 'say-hello'}),
-    handleGoodbye = goodbyeStream.handlerFor({cmd: 'say-goodbye'})
+var handleHello = helloStream.pin({cmd: 'say-hello'}),
+    handleGoodbye = goodbyeStream.pin({cmd: 'say-goodbye'})
 
 // using drain keeps handlers neat and tidy.
 handleHello(drain(function (msg, done) {
-  console.log('Hi!')
+  console.log('Hello!')
   done()
 }))
 

@@ -3,12 +3,12 @@
 // create a new instance of nanite and
 // take a copy of the drain function.
 var nanite = require('../lib/nanite')(),
-    drain = nanite.drain
+    drain = require('nanite-drain')
 
-// .handleFor allows you to wrap a pattern in a named function
+// .pin allows you to wrap a pattern in a named function
 // that you can pass a writeable or transform to later.
-var handleHello = nanite.handlerFor({say: 'Hello'}),
-    handleWorld = nanite.handlerFor({say: 'World'})
+var handleHello = nanite.pin({say: 'Hello'}),
+    handleWorld = nanite.pin({say: 'World'})
 
 // in our case we are using the build in writable function,
 // drain. Which will remove the message from the stream for
