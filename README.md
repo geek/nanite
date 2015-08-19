@@ -3,8 +3,8 @@
 [![git][git-badge]][git-url]
 [![npm][npm-badge]][npm-url]
 
-A pattern matching stream transform; Nanite is a simple node steam transform that runs in _object mode_.
-Anything written to a Nanite instance is first pattern matched to see if a handler can be found. If
+Nanite runs in _object mode_ as a pattern matching node stream transform. Anything
+written to a Nanite instance is first pattern matched to see if a handler can be found. If
 the message is not handled, it is piped out of Nanite, just like a regular transform.
 
 ## Installation
@@ -16,8 +16,8 @@ npm install nanite --save
 
 ## Usage
 The example below can be found and ran in the [eg][] folder. It demonstrates how to use [Nanite - Drain][]
-and [Nanite - Fill][] with the Nanite. Bear in mind though that this module can be used with any readable,
-writeable, or transform streams as well as these two.
+and [Nanite - Fill][] with the Nanite. This module can be used with any readable,
+writeable, or transform streams as well.
 
 ``` js
 'use strict'
@@ -55,8 +55,8 @@ fill([
 
 ### Constructor
 Requiring Nanite produces a builder function for creating Nanite instances. Each instance of Nanite
-maintains it's own message stream which can be piped to or from and even together. Nanite also supports
-a config object which allows you to change how Nanite processes messages.
+maintains its own message stream which can be piped to or from and together. Nanite also supports
+a config object that allows the flexibility to change how Nanite processes messages.
 
 ``` js
 var nanite = require('nanite')
@@ -70,7 +70,7 @@ uiStream.pipe(dataStream)
 ```
 
 #### Config
-Nanite supports a number of options that change how each instance behaves. these are passed
+Nanite supports a number of options that change how each instance behaves. These are passed
 as an object on instance creation.
 
 ``` js
@@ -81,16 +81,16 @@ var passthroughStream = nanite({passthrough: true})
 ```
 
 ##### multiMode: _true|false - default: false_
-Allows multiple handlers to handle the same message. This behaviour essentially replicates
+Allows multiple handlers to handle the same message. This behaviour replicates
 an eventing based model over a command based one.
 
 ##### passthrough: _true|false - default: false_
-Allows messages to passed through to piped streams even if they have already been handled by
+Allows messages to be passed through to piped streams even if they have already been handled by
 a subscribed handler. Needs to be enabled even if `multiMode` is set to true.
 
 ### .handlers
 A [patrun][] instance that represents all of the handlers for a given instance of Nanite. Exposed
-to allow the use of pathrun's internal commands which allow you to query and output the handler
+to allow the use of pathrun's internal commands, providing the ability to query and output the handler
 tree in a variety of ways. See the [patrun repo][] for more information.
 
 ``` js
@@ -101,9 +101,9 @@ console.log(handler.list())
 ```
 
 ### .write(msg) : _bool_
-A method for writing new values to a given Nanite instance. No matter when a value is written it
+A method for writing new values to a given Nanite instance. No matter when a value is written, it
 always starts at the top of the stream and works its way down. Nanite's .write() is the standard
-non modified .write() for a transform stream.
+non-modified .write() for a transform stream.
 
 ``` js
 var nanite = require('nanite')()
@@ -176,7 +176,7 @@ nanite.remove({cmd:'say-hello'})
 
 #### Can I use Through2 or other stream do-da's with Nanite ?
 Yes! Nanite itself is a simple transform and as such can be piped to and from. Handlers are added as
-streams also as long as they are writeable or transforms they are compatible. Do note that anything
+streams, and if they are writeable or are transforms, then they are compatible. Do note that anything
 pushed to the read side of a transform is not passed to nanite, rather any direct pipe of the handler.
 To add messages to nanite, pipe back to it or use .write().
 
@@ -192,8 +192,8 @@ to create a browser copy. Later, a distribution version will be provided.
 See [patrun][] for a full look at how patterns work in detail.
 
 #### Can I swap out .handlers  patrun instance with my own custom version ?
-Yes, as long as it is done before you begin processing messages this should be fine. Pattern rules
-are inforced via patrun, swapping it out gives you the ability to futher modify Nanite
+Yes, as long as it is done before you begin processing messages. Pattern rules
+are enforced via patrun, therefore swapping it out gives you the ability to further modify Nanite
 
 ## Contributing
 Nanite is an __open project__ and encourages participation. If you feel you can help in any way, be
