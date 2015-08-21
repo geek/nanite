@@ -3,9 +3,9 @@
 [![git][git-badge]][git-url]
 [![npm][npm-badge]][npm-url]
 
-Nanite runs in _object mode_ as a pattern matching node stream transform. Anything
-written to a Nanite instance is first pattern matched to see if a handler can be found. If
-the message is not handled, it is piped out of Nanite, just like a regular transform.
+Nanite runs in _object mode_ as a pattern matching node stream transform. Anything written to a
+Nanite instance is first pattern matched to see if a handler can be found. If the message is not
+handled, it is piped out of Nanite, just like a regular transform.
 
 ## Installation
 To install Nanite, simply use npm:
@@ -89,9 +89,9 @@ Allows messages to be passed through to piped streams even if they have already 
 a subscribed handler. Needs to be enabled even if `multiMode` is set to true.
 
 ### .handlers
-A [patrun][] instance that represents all of the handlers for a given instance of Nanite. Exposed
+A [bloomrun][] instance that represents all of the handlers for a given instance of Nanite. Exposed
 to allow the use of pathrun's internal commands, providing the ability to query and output the handler
-tree in a variety of ways. See the [patrun repo][] for more information.
+tree in a variety of ways. See the [bloomrun repo][] for more information.
 
 ``` js
 var nanite = require('nanite')(),
@@ -189,11 +189,7 @@ Yes! Nanite is and will always be usable in the browser. You will need to use we
 to create a browser copy. Later, a distribution version will be provided.
 
 #### What are the pattern rules ?
-See [patrun][] for a full look at how patterns work in detail.
-
-#### Can I swap out .handlers  patrun instance with my own custom version ?
-Yes, as long as it is done before you begin processing messages. Pattern rules
-are enforced via patrun, therefore swapping it out gives you the ability to further modify Nanite
+See [bloomrun][] for a full look at how patterns work in detail.
 
 ## Contributing
 Nanite is an __open project__ and encourages participation. If you feel you can help in any way, be
@@ -217,8 +213,8 @@ Copyright Dean McDonnell 2015, Licensed under [MIT][].
 [npm-badge]: https://img.shields.io/npm/v/nanite.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/nanite
 
-[patrun]: http://npm.im/patrun
-[patrun repo]: https://github.com/rjrodger/patrun
+[bloomrun]: http://npm.im/bloomrun
+[bloomrun repo]: https://github.com/mcollina/bloomrun
 [Patterns 101]: ./docs/nanite-101.md
 [Nanite - Fill]: https://github.com/mcdonnelldean/nanite-fill
 [Nanite - Drain]: https://github.com/mcdonnelldean/nanite-drain
