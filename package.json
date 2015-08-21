@@ -16,13 +16,12 @@
     "test"
   ],
   "dependencies": {
+    "bloomrun": "^0.2.0",
     "extend": "^3.0.0",
     "fastparallel": "^1.6.1",
-    "patrun": "^0.4.4",
     "readable-stream": "^2.0.2"
   },
   "devDependencies": {
-    "drain": "^0.1.0",
     "faucet": "0.0.1",
     "nanite-drain": "^0.1.0",
     "nanite-fill": "^0.1.0",
