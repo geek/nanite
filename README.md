@@ -15,9 +15,9 @@ npm install nanite --save
 ```
 
 ## Usage
-The example below can be found and ran in the [eg][] folder. It demonstrates how to use [Nanite - Drain][]
-and [Nanite - Fill][] with the Nanite. This module can be used with any readable,
-writeable, or transform streams as well.
+The example below can be found and ran in the [eg][] folder. It demonstrates how to use
+[Nanite - Drain][] and [Nanite - Fill][] with the Nanite. This module can be used with any
+readable, writeable, or transform streams as well.
 
 ``` js
 'use strict'
@@ -54,9 +54,10 @@ fill([
 ## API Overview
 
 ### Constructor
-Requiring Nanite produces a builder function for creating Nanite instances. Each instance of Nanite
-maintains its own message stream which can be piped to or from and together. Nanite also supports
-a config object that allows the flexibility to change how Nanite processes messages.
+Requiring Nanite produces a builder function for creating Nanite instances. Each instance
+of Nanite maintains its own message stream which can be piped to or from and together. Nanite
+also supports a config object that allows the flexibility to change how Nanite processes
+messages.
 
 ``` js
 var nanite = require('nanite')
@@ -120,7 +121,7 @@ multiMode is set to true.
 
 ``` js
 var nanite = require('nanite')(),
-    drain = nanite.drain
+    drain = require('nanite-drain')
 
 nanite.when({cmd:'say-hello'}, drain(function (msg, done) {
    done()
@@ -134,7 +135,7 @@ transform.
 
 ``` js
 var nanite = require('nanite')(),
-    drain = nanite.drain
+    drain = require('nanite-drain')
 
 var handlerOne = nanite.pin({cmd: 'say-hello'})
 var handlerTwo = nanite.pin({cmd: 'say-goodbye'})
@@ -154,17 +155,19 @@ nanite.write({cmd: 'say-goodbye'})
 ```
 
 
-### .remove(pattern) : _this_
-A method for removing handlers and their patterns from Nanite.
+### .remove(pattern [, handler]) : _this_
+A method for removing handlers and their patterns from Nanite. Patterns with specific handlers can
+be removed by passing an instance of the handler as a second parameter.
 
 ``` js
-var nanite = require('nanite')
+var nanite = require('nanite'),
+    drain = require('nanite-drain')
 
-nanite.when({cmd:'say-hello'}, into(msg, done) {
+nanite.when({cmd:'say-hello'}, drain(msg, done) {
    done()
 }))
 
-nanite.when({cmd:'say-goodbye'}, into(msg, done) {
+nanite.when({cmd:'say-goodbye'}, drain(msg, done) {
    done()
 }))
 
