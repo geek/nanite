@@ -209,7 +209,7 @@ Copyright Dean McDonnell 2015, Licensed under [MIT][].
 [Contribution Guide]: ./CONTRIBUTING.md
 [eg]: ./eg/basic-usage.js
 
-[travis-badge]: https://img.shields.io/travis/mcdonnelldean/nanite.svg?style=flat-square
+[travis-badge]: https://travis-ci.org/mcdonnelldean/nanite.svg
 [travis-url]: https://travis-ci.org/mcdonnelldean/nanite
 [git-badge]: https://img.shields.io/github/release/mcdonnelldean/nanite.svg?style=flat-square
 [git-url]: https://github.com/mcdonnelldean/nanite/releases
